@@ -51,8 +51,12 @@ update_shell_prompt() {
   cat << 'EOF' >> "$bashrc"
 
 # --- Custom vertical shell prompt added by ubuntu-first-run ---
-PS1='\u@\h\n\w\n\$ '
+PS1='\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$'
 EOF
+
+  echo "✅ Sourcing ~/.bashrc to put new changes into effect."
+
+  source ~/.bashrc
 
   echo "✅ Shell prompt updated and rollback saved."
 }
