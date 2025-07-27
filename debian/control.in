@@ -3,8 +3,7 @@ Version: __VERSION__
 Section: utils
 Priority: optional
 Architecture: all
-Depends: bash, coreutils
 Maintainer: Jesse Hawkins <jesse@thehawkins.us>
 Description: Ubuntu First Run Setup Tool
- A checklist-driven first-time setup assistant for Ubuntu Server 24.04+.
- Includes shell prompt customization and prepares system for additional setup tools.
+ A checklist-driven post-install script for Ubuntu 24.04+.
+ It provides visual prompts, rollback support, and shell customization.
