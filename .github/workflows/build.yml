@@ -1,0 +1,37 @@
+name: Build and Release .deb
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up build environment
+        run: sudo apt-get update && sudo apt-get install -y dpkg-dev
+
+      - name: Get version
+        id: vars
+        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
+
+      - name: Build .deb
+        run: ./build-deb.sh
+
+      - name: Create GitHub Release and upload .deb
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.vars.outputs.version }}
+          name: ubuntu-first-run v${{ steps.vars.outputs.version }}
+          files: |
+            ubuntu-first-run.deb
+            ubuntu-first-run_${{ steps.vars.outputs.version }}_all.deb
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
