@@ -10,6 +10,7 @@ ROOT_DIR="$(pwd)"
 BUILD_DIR="$ROOT_DIR/build"
 DEBIAN_DIR="$BUILD_DIR/DEBIAN"
 INSTALL_DIR="$BUILD_DIR/usr/local/bin"
+SOURCE_SCRIPT="src/ubuntu-first-run.sh"
 
 # Clean and recreate build directories
 rm -rf "$BUILD_DIR"
@@ -20,7 +21,7 @@ mkdir -p "$INSTALL_DIR"
 sed "s/__VERSION__/${VERSION}/" debian/control.in > "$DEBIAN_DIR/control"
 
 # Copy executable
-cp usr/local/bin/ubuntu-first-run "$INSTALL_DIR/ubuntu-first-run"
+cp "$SOURCE_SCRIPT" "$INSTALL_DIR/ubuntu-first-run"
 chmod 755 "$INSTALL_DIR/ubuntu-first-run"
 
 # Build the .deb package
